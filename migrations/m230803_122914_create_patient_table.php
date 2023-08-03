@@ -16,7 +16,7 @@ class m230803_122914_create_patient_table extends Migration
             'id' => $this->primaryKey(),
             'telephone' => $this->string()->notNull(),
             'name' => $this->string()->notNull(),
-            'date_of_birth' => $this->string()->notNull(),
+            'date_of_birth' => $this->date()->notNull(),
             'id_number' => $this->string()->notNull(),
             'address' => $this->string()->notNull(),
             'county' => $this->string()->notNull(),
@@ -24,7 +24,8 @@ class m230803_122914_create_patient_table extends Migration
             'email' => $this->string()->notNull(),
             'gender' => $this->string()->notNull(),
             'marital_status' => $this->string()->notNull(),
-            'created_at' => $this->timestamp()
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')->append('ON UPDATE CURRENT_TIMESTAMP'),
         ]);
     }
 
