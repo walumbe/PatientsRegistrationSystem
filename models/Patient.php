@@ -17,6 +17,7 @@ use Yii;
  * @property string $sub_county
  * @property string $email
  * @property string $gender
+ * @property string $user_id
  * @property string $marital_status
  * @property string|null $created_at
  * @property string|null $updated_at
@@ -63,5 +64,12 @@ class Patient extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function login()
+    {
+        $model = new Patient();
+        $model->user_id = Yii::$app->user->id;
+        $model->save(false);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace app\controllers;
-
+use Yii;
 use app\models\Patient;
 use app\models\PatientSearch;
 use yii\web\Controller;
@@ -38,6 +38,11 @@ class PatientController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->isGuest)
+        {
+            return $this->redirect('/site/login');
+
+        }
         $searchModel = new PatientSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -70,7 +75,7 @@ class PatientController extends Controller
         $model = new Patient();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post()) && $model->login()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
