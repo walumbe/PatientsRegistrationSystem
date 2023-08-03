@@ -25,20 +25,6 @@ class m230803_124853_create_next_of_kin_table extends Migration
             'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
         ]);
 
-        $this->createIndex(
-            'idx-next_of_kin-patient_id',
-            'next_of_kin',
-            'patient_id'
-        );
-
-        $this->addForeignKey(
-            'fk-next_of_kin-patient_id',
-            '{{%next_of_kin}}',
-            'patient_id',
-            '{{%patient}}',
-            'id',
-            'CASCADE',
-        );
     }
 
     /**
@@ -46,7 +32,6 @@ class m230803_124853_create_next_of_kin_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-next_of_kin-patient_id', '{{%next_of_kin}}');
         $this->dropTable('{{%kin}}');
     }
 }

@@ -70,8 +70,12 @@ class NextofkinController extends Controller
         $model = new NextOfKin();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->patient_id = Yii::$app->user->id;
+                if($model->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+                
             }
         } else {
             $model->loadDefaultValues();

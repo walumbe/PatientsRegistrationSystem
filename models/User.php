@@ -6,6 +6,7 @@ use Yii;
 use yii\db\ActiveRecord;
 
 /**
+ * @property string $id
  * @property string $username
  * @property string $password_hash
  * @property string $auth_key

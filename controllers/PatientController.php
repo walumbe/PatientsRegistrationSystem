@@ -75,8 +75,14 @@ class PatientController extends Controller
         $model = new Patient();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->login()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->user_id = Yii::$app->user->id;
+                if($model->save())
+                {
+                    // return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect('/nextofkin/create');
+                }
+                
             }
         } else {
             $model->loadDefaultValues();
